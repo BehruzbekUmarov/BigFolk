@@ -1,4 +1,6 @@
 using BigFolk.Api.Data;
+using BigFolk.Api.Repository;
+using BigFolk.Api.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,8 @@ builder.Services.AddDbContext<BigFolkDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
+
+builder.Services.AddScoped<IGeniusRepository, GeniusRepository>();
 
 var app = builder.Build();
 
