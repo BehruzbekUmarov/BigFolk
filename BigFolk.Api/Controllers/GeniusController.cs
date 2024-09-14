@@ -3,6 +3,7 @@ using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BigFolk.Api.Controllers
 {
@@ -17,9 +18,9 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var geniusDomain = _dbContext.Geniuses.ToList();
+            var geniusDomain = await _dbContext.Geniuses.ToListAsync();
 
             if(geniusDomain ==  null) return NotFound();
 
@@ -44,9 +45,9 @@ namespace BigFolk.Api.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
-        public IActionResult GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var geniusDomain = _dbContext.Geniuses.FirstOrDefault(x => x.Id == id);
+            var geniusDomain = await _dbContext.Geniuses.FirstOrDefaultAsync(x => x.Id == id);
 
             if(geniusDomain == null) return NotFound();
 
@@ -66,7 +67,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] AddGeniusRequestDto requestDto)
+        public async Task<IActionResult> Create([FromBody] AddGeniusRequestDto requestDto)
         {
             var geniusDomain = new Genius()
             {
@@ -74,8 +75,8 @@ namespace BigFolk.Api.Controllers
                 ImageUrl = requestDto.ImageUrl
             };
 
-            _dbContext.Add(geniusDomain);
-            _dbContext.SaveChanges();
+            await _dbContext.AddAsync(geniusDomain);
+            await _dbContext.SaveChangesAsync();
 
             var geniusDto = new GeniusDto
             {
@@ -89,15 +90,15 @@ namespace BigFolk.Api.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
-        public IActionResult Update([FromRoute] Guid id, UpdateGeniusRequestDto requestDto)
+        public async Task<IActionResult> Update([FromRoute] Guid id, UpdateGeniusRequestDto requestDto)
         {
-            var geniusDomain = _dbContext.Geniuses.FirstOrDefault(x => x.Id == id);
+            var geniusDomain = await _dbContext.Geniuses.FirstOrDefaultAsync(x => x.Id == id);
             if (geniusDomain == null) return NotFound();
 
             geniusDomain.Name = requestDto.Name;
             geniusDomain.ImageUrl = requestDto.ImageUrl;
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             var geniusDto = new GeniusDto 
             {
@@ -111,14 +112,14 @@ namespace BigFolk.Api.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
-        public IActionResult Delete([FromRoute] Guid id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var geniusDomain = _dbContext.Geniuses.FirstOrDefault(x =>x.Id == id);  
+            var geniusDomain = await _dbContext.Geniuses.FirstOrDefaultAsync(x =>x.Id == id);  
 
             if(geniusDomain == null) return NotFound();
 
             _dbContext.Remove(geniusDomain);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             var geniusDto = new GeniusDto
             {
