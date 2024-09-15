@@ -1,6 +1,6 @@
 ﻿using BigFolk.Api.Data;
 using BigFolk.Api.Models.Domain;
-using BigFolk.Api.Models.DTO;
+using BigFolk.Api.Models.DTO.Genius;
 using BigFolk.Api.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

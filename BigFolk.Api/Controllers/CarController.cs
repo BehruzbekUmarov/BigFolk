@@ -1,5 +1,5 @@
 ﻿using BigFolk.Api.Models.Domain;
-using BigFolk.Api.Models.DTO;
+using BigFolk.Api.Models.DTO.Car;
 using BigFolk.Api.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -58,7 +58,7 @@ namespace BigFolk.Api.Controllers
                 State = carDomain.State,
                 ImageUrl = carDomain.ImageUrl,
                 CreatedOn = carDomain.CreatedOn,
-                GeniusId = carDomain.GeniusId,
+                GeniusId = carDomain.GeniusId
             };
 
             return Ok(carDto);
@@ -73,7 +73,7 @@ namespace BigFolk.Api.Controllers
                 ImageUrl = requestDto.ImageUrl,
                 State = requestDto.State,
                 GeniusId= requestDto.GeniusId,
-                Type = requestDto.Type,
+                Type = requestDto.Type
             };
 
             carDomain = await _carRepository.CreateAsync(carDomain);

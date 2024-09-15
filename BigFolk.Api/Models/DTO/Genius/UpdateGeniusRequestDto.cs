@@ -1,4 +1,4 @@
-﻿namespace BigFolk.Api.Models.DTO
+﻿namespace BigFolk.Api.Models.DTO.Genius
 {
     public class UpdateGeniusRequestDto
     {

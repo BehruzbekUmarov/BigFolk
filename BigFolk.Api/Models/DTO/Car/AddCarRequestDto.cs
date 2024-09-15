@@ -1,6 +1,6 @@
-﻿namespace BigFolk.Api.Models.DTO
+﻿namespace BigFolk.Api.Models.DTO.Car
 {
-    public class UpdateCarRequestDto
+    public class AddCarRequestDto
     {
         public string Name { get; set; }
         public string Type { get; set; }
