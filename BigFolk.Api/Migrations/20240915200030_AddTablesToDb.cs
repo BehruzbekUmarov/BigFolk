@@ -65,8 +65,7 @@ namespace BigFolk.Api.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsUnicorn = table.Column<bool>(type: "bit", nullable: false),
                     GeniusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)

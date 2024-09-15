@@ -10,7 +10,7 @@ namespace BigFolk.Api.Models.DTO.Genius
 
         public List<Domain.Car> Cars { get; set; } = new List<Domain.Car>();
         public List<Domain.SmartHouse> SmartHouses { get; set; } = new List<Domain.SmartHouse>();
-        public List<Company> Companies { get; set; } = new List<Company>();
+        public List<Domain.Company> Companies { get; set; } = new List<Domain.Company>();
         public List<Habit> Habits { get; set; } = new List<Habit>();
         public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
     }

@@ -46,7 +46,6 @@ namespace BigFolk.Api.Repository
         public async Task<Car?> UpdateAsync(Guid id, Car car)
         {
             var existingCar = await _context.Cars.FirstOrDefaultAsync(x => x.Id == id);
-
             if(existingCar == null) return null;
 
             existingCar.State = car.State;

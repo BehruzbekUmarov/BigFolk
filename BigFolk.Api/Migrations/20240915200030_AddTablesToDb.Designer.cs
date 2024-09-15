@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigFolk.Api.Migrations
 {
     [DbContext(typeof(BigFolkDbContext))]
-    [Migration("20240915172100_somechanges")]
-    partial class somechanges
+    [Migration("20240915200030_AddTablesToDb")]
+    partial class AddTablesToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,11 +61,9 @@ namespace BigFolk.Api.Migrations
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.Company", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("GeniusId")
                         .HasColumnType("uniqueidentifier");
