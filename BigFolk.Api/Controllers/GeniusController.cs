@@ -25,26 +25,25 @@ namespace BigFolk.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var geniusDomain = await _geniusRepository.GetAllAsync();
-
             if(geniusDomain ==  null) return NotFound();
 
-            var geniusDto = new List<GeniusDto>();
-            foreach (var genius in geniusDomain)
-            {
-                geniusDto.Add(new GeniusDto()
-                {
-                    Id = genius.Id,
-                    Name = genius.Name,
-                    ImageUrl = genius.ImageUrl,
-                    Cars = genius.Cars,
-                    Companies = genius.Companies,
-                    SmartHouses = genius.SmartHouses,
-                    Habits = genius.Habits,
-                    Portfolios = genius.Portfolios
-                });
-            }
+            //var geniusDto = new List<GeniusDto>();
+            //foreach (var genius in geniusDomain)
+            //{
+            //    geniusDto.Add(new GeniusDto()
+            //    {
+            //        Id = genius.Id,
+            //        Name = genius.Name,
+            //        ImageUrl = genius.ImageUrl,
+            //        Cars = genius.Cars,
+            //        Companies = genius.Companies,
+            //        SmartHouses = genius.SmartHouses,
+            //        Habits = genius.Habits,
+            //        Portfolios = genius.Portfolios
+            //    });
+            //}
 
-            return Ok(geniusDto);
+            return Ok(_mapper.Map<List<GeniusDto>>(geniusDomain));
         }
 
         [HttpGet]
@@ -55,38 +54,17 @@ namespace BigFolk.Api.Controllers
 
             if(geniusDomain == null) return NotFound();
 
-            var geniusDto = new GeniusDto
-            {
-                Id = geniusDomain.Id,
-                Name = geniusDomain.Name,
-                ImageUrl = geniusDomain.ImageUrl,
-                Cars = geniusDomain.Cars,
-                SmartHouses = geniusDomain.SmartHouses,
-                Companies = geniusDomain.Companies,
-                Habits = geniusDomain.Habits,
-                Portfolios = geniusDomain.Portfolios
-            };
-
-            return Ok(geniusDto);
+            return Ok(_mapper.Map<GeniusDto>(geniusDomain));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddGeniusRequestDto requestDto)
         {
-            var geniusDomain = new Genius()
-            {
-                Name = requestDto.Name,
-                ImageUrl = requestDto.ImageUrl
-            };
+            var geniusDomain = _mapper.Map<Genius>(requestDto);
 
             geniusDomain = await _geniusRepository.CreateAsync(geniusDomain);
 
-            var geniusDto = new GeniusDto
-            {
-                Id = geniusDomain.Id,
-                Name = geniusDomain.Name,
-                ImageUrl = geniusDomain.ImageUrl
-            };
+            var geniusDto = _mapper.Map<GeniusDto>(geniusDomain);
 
             return CreatedAtAction(nameof(GetById), new { id = geniusDto.Id }, geniusDto);   
         }
@@ -95,23 +73,12 @@ namespace BigFolk.Api.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, UpdateGeniusRequestDto requestDto)
         {
-            var geniusDomainModel = new Genius
-            {
-                Name = requestDto.Name,
-                ImageUrl = requestDto.ImageUrl
-            };
+            var geniusDomainModel = _mapper.Map<Genius>(requestDto);
 
             geniusDomainModel = await _geniusRepository.UpdateAsync(id, geniusDomainModel);
             if (geniusDomainModel == null) return NotFound();
 
-            var geniusDto = new GeniusDto 
-            {
-                Id = geniusDomainModel.Id,
-                Name = geniusDomainModel.Name,
-                ImageUrl= geniusDomainModel.ImageUrl
-            };
-
-            return Ok(geniusDto);
+            return Ok(_mapper.Map<GeniusDto>(geniusDomainModel));
         }
 
         [HttpDelete]
@@ -119,17 +86,9 @@ namespace BigFolk.Api.Controllers
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var geniusDomain = await _geniusRepository.DeleteAsync(id);  
-
             if(geniusDomain == null) return NotFound();
-                        
-            var geniusDto = new GeniusDto
-            {
-                Id = geniusDomain.Id,
-                Name = geniusDomain.Name,
-                ImageUrl = geniusDomain.ImageUrl
-            };
 
-            return Ok(geniusDto);
+            return Ok(_mapper.Map<GeniusDto>(geniusDomain););
         }
     }
 }

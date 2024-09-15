@@ -44,7 +44,11 @@ namespace BigFolk.Api.Repository
 
         public async Task<Genius?> GetByIdAsync(Guid id)
         {
-            return await _dbContext.Geniuses.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Geniuses
+                .Include(x => x.Cars)
+                .Include(x => x.SmartHouses)
+                .Include(x => x.Companies)
+                .Include(x => x.Habits).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Genius?> UpdateAsync(Guid id, Genius genius)
