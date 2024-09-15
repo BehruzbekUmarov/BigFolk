@@ -1,4 +1,5 @@
 using BigFolk.Api.Data;
+using BigFolk.Api.Mapping;
 using BigFolk.Api.Repository;
 using BigFolk.Api.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+        .AddJsonOptions(options =>
+            options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -20,6 +24,9 @@ builder.Services.AddDbContext<BigFolkDbContext>(options =>
 builder.Services.AddScoped<IGeniusRepository, GeniusRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ISmartHouseRepository, SmartHouseRepository>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using BigFolk.Api.Data;
+﻿using AutoMapper;
+using BigFolk.Api.Data;
 using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.Genius;
 using BigFolk.Api.Repository.Interface;
@@ -13,9 +14,11 @@ namespace BigFolk.Api.Controllers
     public class GeniusController : ControllerBase
     {
         private readonly IGeniusRepository _geniusRepository;
-        public GeniusController(IGeniusRepository geniusRepository)
+        private readonly IMapper _mapper;
+        public GeniusController(IGeniusRepository geniusRepository, IMapper mapper)
         {
             _geniusRepository = geniusRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +29,7 @@ namespace BigFolk.Api.Controllers
             if(geniusDomain ==  null) return NotFound();
 
             var geniusDto = new List<GeniusDto>();
-            foreach(var genius in geniusDomain)
+            foreach (var genius in geniusDomain)
             {
                 geniusDto.Add(new GeniusDto()
                 {

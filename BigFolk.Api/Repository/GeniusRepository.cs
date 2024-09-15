@@ -35,7 +35,11 @@ namespace BigFolk.Api.Repository
 
         public async Task<List<Genius>> GetAllAsync()
         {
-            return await _dbContext.Geniuses.ToListAsync();
+            return await _dbContext.Geniuses
+                .Include(x => x.Cars)
+                .Include(x => x.SmartHouses)
+                .Include(x => x.Companies)
+                .Include(x => x.Habits).ToListAsync();
         }
 
         public async Task<Genius?> GetByIdAsync(Guid id)
