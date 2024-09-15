@@ -12,11 +12,9 @@ namespace BigFolk.Api.Controllers
     [ApiController]
     public class GeniusController : ControllerBase
     {
-        private readonly BigFolkDbContext _dbContext;
         private readonly IGeniusRepository _geniusRepository;
-        public GeniusController(BigFolkDbContext dbContext, IGeniusRepository geniusRepository)
+        public GeniusController(IGeniusRepository geniusRepository)
         {
-            _dbContext = dbContext;
             _geniusRepository = geniusRepository;
         }
 

@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BigFolk.Api.Models.Domain
+﻿namespace BigFolk.Api.Models.DTO
 {
-    public class Car
+    public class CarDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -12,6 +10,5 @@ namespace BigFolk.Api.Models.Domain
         public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         public Guid GeniusId { get; set; }
-        public Genius Genius { get; set; } = null!;
     }
 }

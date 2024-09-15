@@ -53,7 +53,7 @@ namespace BigFolk.Api.Migrations
 
                     b.HasIndex("GeniusId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.Company", b =>
@@ -78,7 +78,7 @@ namespace BigFolk.Api.Migrations
 
                     b.HasIndex("GeniusId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.Genius", b =>
@@ -96,7 +96,7 @@ namespace BigFolk.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Geniuses");
+                    b.ToTable("Geniuses", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.Habit", b =>
@@ -120,7 +120,7 @@ namespace BigFolk.Api.Migrations
 
                     b.HasIndex("GeniusId");
 
-                    b.ToTable("Habits");
+                    b.ToTable("Habits", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.HouseSystem", b =>
@@ -141,7 +141,7 @@ namespace BigFolk.Api.Migrations
                     b.HasIndex("SmartHouseId")
                         .IsUnique();
 
-                    b.ToTable("HouseSystems");
+                    b.ToTable("HouseSystems", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.Portfolio", b =>
@@ -156,7 +156,7 @@ namespace BigFolk.Api.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("Portfolios");
+                    b.ToTable("Portfolios", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.Skill", b =>
@@ -179,7 +179,7 @@ namespace BigFolk.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skills", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.SmartHouse", b =>
@@ -210,7 +210,7 @@ namespace BigFolk.Api.Migrations
 
                     b.HasIndex("GeniusId");
 
-                    b.ToTable("SmartHouses");
+                    b.ToTable("SmartHouses", (string)null);
                 });
 
             modelBuilder.Entity("BigFolk.Api.Models.Domain.Car", b =>

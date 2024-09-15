@@ -18,6 +18,7 @@ builder.Services.AddDbContext<BigFolkDbContext>(options =>
 });
 
 builder.Services.AddScoped<IGeniusRepository, GeniusRepository>();
+builder.Services.AddScoped<ICarRepository, CarRepository>();
 
 var app = builder.Build();
 
