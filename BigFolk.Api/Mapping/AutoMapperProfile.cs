@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.Genius;
+using BigFolk.Api.Models.DTO.SmartHouse;
 
 namespace BigFolk.Api.Mapping
 {
@@ -11,6 +12,10 @@ namespace BigFolk.Api.Mapping
             CreateMap<Genius, GeniusDto>().ReverseMap();
             CreateMap<AddGeniusRequestDto, Genius>().ReverseMap();
             CreateMap<UpdateGeniusRequestDto, Genius>().ReverseMap();
+
+            CreateMap<SmartHouse, SmartHouseDto>().ReverseMap();
+            CreateMap<UpdateSmartHouseRequestDto, Genius>().ReverseMap();
+            CreateMap<AddSmartHouseRequestDto, Genius>().ReverseMap();
         }
     }
 }

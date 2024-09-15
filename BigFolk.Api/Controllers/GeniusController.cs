@@ -88,7 +88,7 @@ namespace BigFolk.Api.Controllers
             var geniusDomain = await _geniusRepository.DeleteAsync(id);  
             if(geniusDomain == null) return NotFound();
 
-            return Ok(_mapper.Map<GeniusDto>(geniusDomain););
+            return Ok(_mapper.Map<GeniusDto>(geniusDomain));
         }
     }
 }
