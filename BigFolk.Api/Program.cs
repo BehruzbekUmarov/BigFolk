@@ -24,6 +24,7 @@ builder.Services.AddDbContext<BigFolkDbContext>(options =>
 builder.Services.AddScoped<IGeniusRepository, GeniusRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ISmartHouseRepository, SmartHouseRepository>();
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
