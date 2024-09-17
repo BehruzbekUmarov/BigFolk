@@ -2,6 +2,7 @@
 using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.Company;
 using BigFolk.Api.Models.DTO.Genius;
+using BigFolk.Api.Models.DTO.Habit;
 using BigFolk.Api.Models.DTO.SmartHouse;
 
 namespace BigFolk.Api.Mapping
@@ -21,6 +22,10 @@ namespace BigFolk.Api.Mapping
             CreateMap<Company, CompanyDto>().ReverseMap();
             CreateMap<UpdateCompanyRequestDto, Company>().ReverseMap();
             CreateMap<AddCompanyRequestDto, Company>().ReverseMap();
+
+            CreateMap<Habit, HabitDto>().ReverseMap();
+            CreateMap<UpdateHabitRequestDto, Habit>().ReverseMap();
+            CreateMap<AddHabitRequestDto, Habit>().ReverseMap();
         }
     }
 }
