@@ -26,7 +26,7 @@ namespace BigFolk.Api.Controllers
             var portfolioDomain = await _portfolioRepository.GetAll();
             if(portfolioDomain == null) NotFound();
 
-            return Ok(_mapper.Map<PortfolioDto>(portfolioDomain));
+            return Ok(_mapper.Map<List<PortfolioDto>>(portfolioDomain));
         }
 
         [HttpPost]
