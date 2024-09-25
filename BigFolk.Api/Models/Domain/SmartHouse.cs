@@ -14,6 +14,7 @@ namespace BigFolk.Api.Models.Domain
         public Guid GeniusId { get; set; }
         [JsonIgnore]
         public Genius Genius { get; set; } = null!;
+        [JsonIgnore]
         public HouseSystem? HouseSystem { get; set; }
     }
 }

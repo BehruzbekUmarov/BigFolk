@@ -18,8 +18,8 @@ namespace BigFolk.Api.Mapping
             CreateMap<UpdateGeniusRequestDto, Genius>().ReverseMap();
 
             CreateMap<SmartHouse, SmartHouseDto>().ReverseMap();
-            CreateMap<UpdateSmartHouseRequestDto, Genius>().ReverseMap();
-            CreateMap<AddSmartHouseRequestDto, Genius>().ReverseMap();
+            CreateMap<UpdateSmartHouseRequestDto, SmartHouse>().ReverseMap();
+            CreateMap<AddSmartHouseRequestDto, SmartHouse>().ReverseMap();
 
             CreateMap<Company, CompanyDto>().ReverseMap();
             CreateMap<UpdateCompanyRequestDto, Company>().ReverseMap();
