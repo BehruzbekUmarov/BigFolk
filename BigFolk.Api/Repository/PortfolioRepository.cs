@@ -21,14 +21,14 @@ namespace BigFolk.Api.Repository
             return portfolio;
         }
 
-        public async Task<Portfolio> Delete(Guid id)
+        public async Task<Portfolio?> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Portfolio>> GetAll()
+        public async Task<List<Portfolio>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Portfolios.ToListAsync();
         }
 
         public Task<Portfolio?> GetById(Guid id)
