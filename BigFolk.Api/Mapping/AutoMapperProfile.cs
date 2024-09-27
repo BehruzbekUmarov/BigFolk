@@ -3,6 +3,7 @@ using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.Company;
 using BigFolk.Api.Models.DTO.Genius;
 using BigFolk.Api.Models.DTO.Habit;
+using BigFolk.Api.Models.DTO.HouseSystem;
 using BigFolk.Api.Models.DTO.Portfolio;
 using BigFolk.Api.Models.DTO.Skill;
 using BigFolk.Api.Models.DTO.SmartHouse;
@@ -35,6 +36,10 @@ namespace BigFolk.Api.Mapping
             CreateMap<Skill, SkillDto>().ReverseMap();
             CreateMap<AddSkillRequestDto, Skill>().ReverseMap();
             CreateMap<UpdateSkillRequestDto, Skill>().ReverseMap();
+
+            CreateMap<HouseSystem, HouseSystemDto>().ReverseMap();
+            CreateMap<AddHouseSystemRequestDto, HouseSystem>().ReverseMap();
+            CreateMap<UpdateHouseSystemRequestDto, HouseSystem>().ReverseMap();
         }
     }
 }
