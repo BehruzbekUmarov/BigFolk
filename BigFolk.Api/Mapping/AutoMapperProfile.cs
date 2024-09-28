@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BigFolk.Api.Models.Domain;
+using BigFolk.Api.Models.DTO.Car;
 using BigFolk.Api.Models.DTO.Company;
 using BigFolk.Api.Models.DTO.Genius;
 using BigFolk.Api.Models.DTO.Habit;
@@ -21,6 +22,10 @@ namespace BigFolk.Api.Mapping
             CreateMap<SmartHouse, SmartHouseDto>().ReverseMap();
             CreateMap<UpdateSmartHouseRequestDto, SmartHouse>().ReverseMap();
             CreateMap<AddSmartHouseRequestDto, SmartHouse>().ReverseMap();
+
+            CreateMap<Car, CarDto>().ReverseMap();
+            CreateMap<UpdateCarRequestDto, Car>().ReverseMap();
+            CreateMap<AddCarRequestDto, Car>().ReverseMap();
 
             CreateMap<Company, CompanyDto>().ReverseMap();
             CreateMap<UpdateCompanyRequestDto, Company>().ReverseMap();

@@ -28,7 +28,7 @@ namespace BigFolk.Api.Repository
 
         public async Task<List<Portfolio>> GetAll()
         {
-            return await _dbContext.Portfolios.ToListAsync();
+            return await _dbContext.Portfolios.Include(c => c.Skill).Include(c => c.Genius).ToListAsync();
         }
 
         public Task<Portfolio?> GetById(Guid id)

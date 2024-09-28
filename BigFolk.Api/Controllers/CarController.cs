@@ -1,4 +1,5 @@
-﻿using BigFolk.Api.Models.Domain;
+﻿using AutoMapper;
+using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.Car;
 using BigFolk.Api.Repository.Interface;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +12,12 @@ namespace BigFolk.Api.Controllers
     public class CarController : ControllerBase
     {
         private readonly ICarRepository _carRepository;
+        private readonly IMapper _mapper;
 
-        public CarController(ICarRepository carRepository)
+        public CarController(ICarRepository carRepository, IMapper mapper)
         {
             _carRepository = carRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -22,24 +25,24 @@ namespace BigFolk.Api.Controllers
         {
             var carDomain = await _carRepository.GetAllAsync();
 
-            if(carDomain == null) return NotFound();
+            if (carDomain == null) return NotFound();
 
-            var carDto = new List<CarDto>();
-            foreach (var car in carDomain)
-            {
-                carDto.Add(new CarDto
-                {
-                    Id = car.Id,
-                    Name = car.Name,
-                    Type = car.Type,
-                    State = car.State,
-                    ImageUrl = car.ImageUrl,
-                    CreatedOn = car.CreatedOn,
-                    GeniusId = car.GeniusId,
-                });
-            }
+            //var carDto = new List<CarDto>();
+            //foreach (var car in carDomain)
+            //{
+            //    carDto.Add(new CarDto
+            //    {
+            //        Id = car.Id,
+            //        Name = car.Name,
+            //        Type = car.Type,
+            //        State = car.State,
+            //        ImageUrl = car.ImageUrl,
+            //        CreatedOn = car.CreatedOn,
+            //        GeniusId = car.GeniusId,
+            //    });
+            //}
 
-            return Ok(carDto);
+            return Ok(_mapper.Map<List<CarDto>>(carDomain));
         }
 
         [HttpGet]
@@ -50,45 +53,18 @@ namespace BigFolk.Api.Controllers
 
             if(carDomain == null) return NotFound();
 
-            var carDto = new CarDto
-            {
-                Id = carDomain.Id,
-                Name = carDomain.Name,
-                Type = carDomain.Type,
-                State = carDomain.State,
-                ImageUrl = carDomain.ImageUrl,
-                CreatedOn = carDomain.CreatedOn,
-                GeniusId = carDomain.GeniusId
-            };
-
-            return Ok(carDto);
+            return Ok(_mapper.Map<CarDto>(carDomain));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddCarRequestDto requestDto)
         {
-            var carDomain = new Car()
-            {
-                Name = requestDto.Name,
-                ImageUrl = requestDto.ImageUrl,
-                State = requestDto.State,
-                GeniusId= requestDto.GeniusId,
-                Type = requestDto.Type
-            };
+            var carDomain = _mapper.Map<Car>(requestDto);
 
             carDomain = await _carRepository.CreateAsync(carDomain);
             if(carDomain == null) return NotFound();
 
-            var carDto = new CarDto()
-            {
-                Id = carDomain.Id,
-                Name = carDomain.Name,
-                Type = carDomain.Type,
-                State = carDomain.State,
-                ImageUrl = carDomain.ImageUrl,
-                CreatedOn = carDomain.CreatedOn,
-                GeniusId = requestDto.GeniusId
-            };
+            var carDto = _mapper.Map<CarDto>(carDomain);
 
             return CreatedAtAction(nameof(GetById), new { id = carDto.Id }, carDto);
         }
@@ -97,30 +73,12 @@ namespace BigFolk.Api.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCarRequestDto requestDto)
         {
-            var carDomain = new Car()
-            {
-                Name = requestDto.Name,
-                ImageUrl = requestDto.ImageUrl,
-                State = requestDto.State,
-                Type = requestDto.Type,
-                GeniusId = requestDto.GeniusId
-            };
+            var carDomain = _mapper.Map<Car>(requestDto);
 
             carDomain = await _carRepository.UpdateAsync(id, carDomain);
             if(carDomain == null) return NotFound();
 
-            var carDto = new CarDto()
-            {
-                Id = carDomain.Id,
-                Name = carDomain.Name,
-                Type = carDomain.Type,
-                State = carDomain.State,
-                ImageUrl = carDomain.ImageUrl,
-                CreatedOn = carDomain.CreatedOn,
-                GeniusId = requestDto.GeniusId
-            };
-
-            return Ok(carDto);
+            return Ok(_mapper.Map<Car>(carDomain));
         }
 
         [HttpDelete]
@@ -130,18 +88,7 @@ namespace BigFolk.Api.Controllers
             var carDomain = await _carRepository.DeleteAsync(id);
             if(carDomain == null) return NotFound();
 
-            var carDto = new CarDto()
-            {
-                Id = carDomain.Id,
-                Name = carDomain.Name,
-                Type = carDomain.Type,
-                State = carDomain.State,
-                ImageUrl = carDomain.ImageUrl,
-                CreatedOn = carDomain.CreatedOn,
-                GeniusId = carDomain.GeniusId
-            };
-
-            return Ok(carDto);
+            return Ok(_mapper.Map<CarDto>(carDomain));
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BigFolk.Api.Models.DTO.Car
+﻿using BigFolk.Api.Models.DTO.Genius;
+
+namespace BigFolk.Api.Models.DTO.Car
 {
     public class CarDto
     {
