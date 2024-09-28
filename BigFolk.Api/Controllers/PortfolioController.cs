@@ -45,7 +45,7 @@ namespace BigFolk.Api.Controllers
         //public async Task<IActionResult> Delete([FromRoute] Guid id)
         //{
         //    var portfolioDomain = await _portfolioRepository.Delete(id);
-        //    if(portfolioDomain == null) NotFound();
+        //    if (portfolioDomain == null) NotFound();
 
         //    Ok(_mapper.Map<PortfolioDto>(portfolioDomain));
         //}

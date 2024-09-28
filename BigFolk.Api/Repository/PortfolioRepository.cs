@@ -36,7 +36,7 @@ namespace BigFolk.Api.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Portfolio> Update(Guid id, Portfolio portfolio)
+        public Task<Portfolio?> Update(Guid id, Portfolio portfolio)
         {
             throw new NotImplementedException();
         }

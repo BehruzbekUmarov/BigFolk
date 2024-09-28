@@ -7,7 +7,7 @@ namespace BigFolk.Api.Repository.Interface
         Task<List<Portfolio>> GetAll();
         Task<Portfolio?> GetById(Guid id);
         Task<Portfolio> Craete(Portfolio portfolio);
-        Task<Portfolio> Update(Guid id, Portfolio portfolio);
-        Task<Portfolio> Delete(Guid id);
+        Task<Portfolio?> Update(Guid id, Portfolio portfolio);
+        Task<Portfolio?> Delete(Guid id);
     }
 }
