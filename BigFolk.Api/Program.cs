@@ -2,6 +2,7 @@ using BigFolk.Api.Data;
 using BigFolk.Api.Mapping;
 using BigFolk.Api.Repository;
 using BigFolk.Api.Repository.Interface;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,9 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
+builder.Services
+    .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Program>());
 
 builder.Services.AddDbContext<BigFolkDbContext>(options =>
 {
