@@ -3,6 +3,7 @@ using BigFolk.Api.Data;
 using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.Genius;
 using BigFolk.Api.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetAll()
         {
             var geniusDomain = await _geniusRepository.GetAllAsync();
@@ -48,6 +50,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var geniusDomain = await _geniusRepository.GetByIdAsync(id);
@@ -58,6 +61,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create([FromBody] AddGeniusRequestDto requestDto)
         {
             var geniusDomain = _mapper.Map<Genius>(requestDto);
@@ -71,6 +75,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, UpdateGeniusRequestDto requestDto)
         {
             var geniusDomainModel = _mapper.Map<Genius>(requestDto);
@@ -83,6 +88,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var geniusDomain = await _geniusRepository.DeleteAsync(id);  

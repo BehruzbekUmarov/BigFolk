@@ -2,6 +2,7 @@
 using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.SmartHouse;
 using BigFolk.Api.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetAll()
         {
             var smartHouseDomain = await _smartHouseRepository.GetAllAsync();
@@ -32,6 +34,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var smartHouseDomain = await _smartHouseRepository.GetByIdAsync(id);
@@ -41,6 +44,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create(AddSmartHouseRequestDto requestDto)
         {
             var smartHouseDomain = _mapper.Map<SmartHouse>(requestDto);
@@ -54,6 +58,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id,[FromBody] UpdateSmartHouseRequestDto requestDto)
         {
             var smartHouseDomain = _mapper.Map<SmartHouse>(requestDto);
@@ -66,6 +71,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var smartHouseDomain = await _smartHouseRepository.DeleteAsync(id);

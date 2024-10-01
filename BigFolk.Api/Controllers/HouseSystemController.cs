@@ -2,6 +2,7 @@
 using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.HouseSystem;
 using BigFolk.Api.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetAll()
         {
             var houseSystemDomain = await _systemRepository.GetAllAsync();
@@ -31,6 +33,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var houseSystemDomain = await _systemRepository.GetByIdAsync(id);
@@ -40,6 +43,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create([FromBody] AddHouseSystemRequestDto systemRequestDto)
         {
             var systemDomain = _mapper.Map<HouseSystem>(systemRequestDto);
@@ -55,6 +59,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpPut]
         [Route("{id:GUid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateHouseSystemRequestDto systemRequestDto)
         {
             var systemDomain = _mapper.Map<HouseSystem>(systemRequestDto);
@@ -67,6 +72,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var systemDomain = await _systemRepository.DeleteAsync(id);

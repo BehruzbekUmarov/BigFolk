@@ -2,6 +2,7 @@
 using BigFolk.Api.Models.Domain;
 using BigFolk.Api.Models.DTO.Skill;
 using BigFolk.Api.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetAll()
         {
             var skillDomain = await _skillRepository.GetAllAsync();
@@ -31,6 +33,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader, Writer")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var skillDomain = await _skillRepository.GetByIdAsync(id);
@@ -40,6 +43,7 @@ namespace BigFolk.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Craete([FromBody] AddSkillRequestDto addSkillRequest)
         {
             var skillDomain = _mapper.Map<Skill>(addSkillRequest);
@@ -54,6 +58,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateSkillRequestDto skillRequestDto)
         {
             var skillDomain = _mapper.Map<Skill>(skillRequestDto);
@@ -66,6 +71,7 @@ namespace BigFolk.Api.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var skillDomain = await _skillRepository.DeleteAsync(id);
